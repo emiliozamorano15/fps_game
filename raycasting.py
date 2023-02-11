@@ -2,7 +2,6 @@ import pygame as pg
 import math
 from settings import *
 
-
 class RayCasting:
     def __init__(self, game):
         self.game = game
@@ -62,8 +61,15 @@ class RayCasting:
 
             ## draw for debug
 
-            pg.draw.line(self.game.screen, 'yellow', (50 * ox, 50 * oy),
-            (50 * ox + 50 * depth * cos_a, 50 * oy + 50 * depth * sin_a), 2)
+            # pg.draw.line(self.game.screen, 'yellow', (50 * ox, 50 * oy),
+            # (50 * ox + 50 * depth * cos_a, 50 * oy + 50 * depth * sin_a), 2)
+
+            # projection
+            proj_height = SCREEN_DIST / (depth + 0.0001)
+
+            # draw walls
+            pg.draw.rect(self.game.screen, 'white',
+            (ray * SCALE, HALF_HEIGHT - proj_height // 2, SCALE, proj_height))
 
             ray_angle += DELTA_ANGLE
 
